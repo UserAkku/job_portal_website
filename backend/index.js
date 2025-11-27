@@ -45,9 +45,9 @@ app.use("/api/v1/application", applicationRoute )
 
 
 app.use(express.static(path.join(__dirname, "./frontend/dist")))
-app.get("*", (_,res)=>{
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"))
-}) //mere pass req kaam nhi aa rha isliye ese bhi likh sakte hai use
+app.get("/*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
+});
 
 app.listen(port, ()=>{
     console.log(`server running at ${port}`)
