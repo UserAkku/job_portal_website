@@ -1,7 +1,5 @@
 import { Company} from  "../models/company.model.js";
 
-
-
 export const registerCompany = async (req, res) => {
     try {
         const { companyName } = req.body;
@@ -11,8 +9,7 @@ export const registerCompany = async (req, res) => {
                 success : false
             })
         }
-
-        let company = await Company.find({
+        let company = await Company.findOne({
             name : companyName
         })
 
@@ -25,7 +22,7 @@ export const registerCompany = async (req, res) => {
 
         company = await Company.create({
             name: companyName,
-            userid : req.id
+            userId : req.id
         })
 
         return res.status(200).json({
@@ -35,7 +32,12 @@ export const registerCompany = async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        return res.status(500).json({
+      message: "Server error, please try again later",
+      error: error.message,
+      success: false,
+    });
     }
 }
 
@@ -55,7 +57,7 @@ export const getCompany = async (req, res) => {
             success : true
         })
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
     }
 }
 

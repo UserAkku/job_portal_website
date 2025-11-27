@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   try {
+    console.log("eroor chk 1")
     const { fullname, email, phoneNumber, password, role } = req.body;
     if (!fullname || !email || !phoneNumber || !password || !role) {
         return res.status(400).json({
@@ -11,6 +12,8 @@ export const register = async (req, res) => {
         success: false,
       });
     }
+
+
     const user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({
@@ -30,7 +33,7 @@ export const register = async (req, res) => {
 
     return res.status(201).json({
       message: "Account created successfully,",
-      status: true,
+      success: true,
     });
   } catch (error) {
     console.log(error);
@@ -123,11 +126,15 @@ export const logout = async (req, res) => {
     console.log(error);
   }
 };
+//logout shi ahai working hai but hum uskoo aur standerd kr saktee hai
+
+
+
 
 export const updateProfile = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, bio, skills } = req.body;
-    const file = req.file;
+    // const file = req.file;
     // if (!fullname || !email || !phoneNumber || !bio || !skills) {
     //     return res.status(400).json({
     //     message: "Something is missing",
@@ -147,10 +154,10 @@ export const updateProfile = async (req, res) => {
         success: false,
       });
     }
-    if (fullname)user.fullname = fullname;
-    if (email)user.email = email;
-    if (phoneNumber)user.phoneNumber = phoneNumber;
-    if (bio)user.profile.bio = bio;
+    if (fullname) user.fullname = fullname;
+    if (email) user.email = email;
+    if (phoneNumber) user.phoneNumber = phoneNumber;
+    if (bio) user.profile.bio = bio;
     let skillsArray;
     if (skills){
       skillsArray = skills.split(",");
