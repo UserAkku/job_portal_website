@@ -8,20 +8,17 @@ import companyRoute from "./routes/company.route.js";
 import jobRoute from "./routes/job.route.js";
 import applicationRoute from "./routes/application.route.js";
 import path from "path";
+import { fileURLToPath } from 'url';
 
 
 dotenv.config({});
 const app = express();
 
-const  __dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
-app.get("/home", (req,res)=>{
-    return res.status(200).json({
-        message : "hello anant ke papa",
-        success : true
-    }) 
-})
+
 
 //middleware
 
@@ -29,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser());
 const corsOptions = {
-    origin : 'https://dihadi-q3e5.onrender.com',
+    origin : '*',
     credentials : true
 }
 
@@ -44,9 +41,10 @@ app.use("/api/v1/job", jobRoute )
 app.use("/api/v1/application", applicationRoute )
 
 
-app.use(express.static(path.join(__dirname, "./frontend/dist")))
-app.get(/.*/, (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+app.get(/.*/, (req, res) => {  // Use regex instead
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
 
@@ -63,6 +61,7 @@ app.listen(port, ()=>{
 
 //cors
 //utils and cnfig me kiaa diffrnce me ne rtih db wali file ko utils me likhaa hai and chat gpt says ki db wali file and .env etc ko config me daloo 
+
 
 
 
