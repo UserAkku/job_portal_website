@@ -1,1 +1,1 @@
-export const USER_API_END_POINT = "https://dihadi-q3e5.onrender.com/api/v1/user";
+export const USER_API_END_POINT = "/api/v1/user";
