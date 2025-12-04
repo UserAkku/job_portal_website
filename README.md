@@ -1,8 +1,6 @@
 # dihadi
 
-**Ek chhota aur seedha README** — is repo ke liye jaldi se setup aur contribution guide.
 
-> ⚠️ NOTE: Yeh README generic assumptions pe based hai (backend `backend/` folder, frontend `frontend/` folder, Node.js + React + Tailwind). Agar repo structure alag ho to mujhe bata dena, main turant update kar dunga.
 
 ---
 
